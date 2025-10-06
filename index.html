@@ -6,135 +6,160 @@
 <title>YouTube Thumbnail Downloader</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-    /* Reset & Body */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #fdfdfd;
-        color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
-    }
+/* Reset & Body */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-    /* Container */
-    .container {
-        background-color: #ffffff;
-        padding: 50px 40px;
-        border-radius: 20px;
-        box-shadow: 0 15px 50px rgba(0,0,0,0.08);
-        text-align: center;
-        width: 100%;
-        max-width: 700px;
-        transition: transform 0.3s;
-    }
-    .container:hover { transform: translateY(-2px); }
+/* Container */
+.container {
+    background-color: #ffffff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+}
 
-    /* Header */
-    h1 {
-        color: #000;
-        font-size: 32px;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-    }
-    p.subtitle {
-        font-size: 16px;
-        color: #555;
-        margin-bottom: 30px;
-    }
+/* Header */
+h1 {
+    color: #ff6400;
+    font-size: 32px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+p.subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
 
-    /* Input & Button */
-    .input-group {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 30px;
-    }
-    input {
-        flex: 1 1 300px;
-        padding: 14px 18px;
-        border-radius: 12px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-        transition: 0.3s;
-    }
-    input:focus {
-        border-color: #ff6400;
-        outline: none;
-        box-shadow: 0 0 12px rgba(255,100,0,0.2);
-    }
-    button {
-        background-color: #ff6400;
-        color: white;
-        border: none;
-        padding: 14px 22px;
-        font-size: 16px;
-        font-weight: 500;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255,100,0,0.3);
-    }
-    button:hover {
-        background-color: #e65c00;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(255,100,0,0.35);
-    }
+/* Input & Button */
+.input-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+input {
+    flex: 1 1 300px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: 0.3s;
+}
+input:focus {
+    border-color: #ff6400;
+    outline: none;
+    box-shadow: 0 0 12px rgba(255,100,0,0.2);
+}
+button {
+    background-color: #ff6400;
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,100,0,0.3);
+}
+button:hover {
+    background-color: #e65c00;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,100,0,0.35);
+}
 
-    /* Thumbnail Grid */
-    .thumbnails {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-    }
+/* Thumbnail Grid */
+.thumbnails {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
 
-    /* Thumbnail Cards */
-    .thumbnail-card {
-        background: #ffffff;
-        border-radius: 16px;
-        border: 2px solid #ff6400;
-        overflow: hidden;
-        box-shadow: 0 6px 20px rgba(255,100,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .thumbnail-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 35px rgba(255,100,0,0.25);
-    }
-    .thumbnail-card img {
-        width: 100%;
-        display: block;
-    }
-    .card-body {
-        padding: 12px 10px;
-        display: flex;
-        justify-content: center;
-    }
-    .card-body a {
-        text-decoration: none;
-        color: white;
-        background-color: #ff6400;
-        padding: 10px 16px;
-        border-radius: 10px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255,100,0,0.3);
-    }
-    .card-body a:hover {
-        background-color: #e65c00;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(255,100,0,0.35);
-    }
+/* Thumbnail Cards */
+.thumbnail-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 2px solid #ff6400;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(255,100,0,0.1);
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s;
+}
+.thumbnail-card.pop-in {
+    transform: translateY(0);
+    opacity: 1;
+}
+.thumbnail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(255,100,0,0.25);
+}
+.thumbnail-card img {
+    width: 100%;
+    display: block;
+}
 
-    /* Responsive */
-    @media(max-width: 500px) {
-        h1 { font-size: 26px; }
-        p.subtitle { font-size: 14px; }
-        input, button { font-size: 14px; padding: 12px 14px; }
-    }
+/* Resolution Overlay */
+.resolution-label {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255,100,0,0.85);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Card Body */
+.card-body {
+    padding: 12px 10px;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.thumbnail-card.expanded .card-body {
+    opacity: 1;
+}
+.card-body a {
+    text-decoration: none;
+    color: white;
+    background-color: #ff6400;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,100,0,0.3);
+}
+.card-body a:hover {
+    background-color: #e65c00;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,100,0,0.35);
+}
+
+/* Responsive */
+@media(max-width: 500px) {
+    h1 { font-size: 26px; }
+    p.subtitle { font-size: 14px; }
+    input, button { font-size: 14px; padding: 12px 14px; }
+}
 </style>
 </head>
 <body>
@@ -160,12 +185,19 @@ function generateThumbnails() {
         return;
     }
 
-    const sizes = ["default", "mqdefault", "hqdefault", "sddefault", "maxresdefault"];
+    const sizes = [
+        { name: "default", resolution: "120×90" },
+        { name: "mqdefault", resolution: "320×180" },
+        { name: "hqdefault", resolution: "480×360" },
+        { name: "sddefault", resolution: "640×480" },
+        { name: "maxresdefault", resolution: "1280×720" }
+    ];
+
     const thumbnailsDiv = document.getElementById('thumbnails');
     thumbnailsDiv.innerHTML = '';
 
-    sizes.forEach(size => {
-        const imgUrl = `https://img.youtube.com/vi/${videoId}/${size}.jpg`;
+    sizes.forEach((size, index) => {
+        const imgUrl = `https://img.youtube.com/vi/${videoId}/${size.name}.jpg`;
 
         const card = document.createElement('div');
         card.className = 'thumbnail-card';
@@ -174,17 +206,34 @@ function generateThumbnails() {
         img.src = imgUrl;
         card.appendChild(img);
 
+        // Resolution Overlay
+        const label = document.createElement('div');
+        label.className = 'resolution-label';
+        label.textContent = size.resolution;
+        card.appendChild(label);
+
+        // Card Body
         const cardBody = document.createElement('div');
         cardBody.className = 'card-body';
         const a = document.createElement('a');
         a.href = imgUrl;
-        a.download = `${videoId}_${size}.jpg`;
+        a.download = `${videoId}_${size.resolution}.jpg`;
         a.target = "_blank";
-        a.textContent = `Download ${size}`;
+        a.textContent = `Download`;
         cardBody.appendChild(a);
-
         card.appendChild(cardBody);
+
         thumbnailsDiv.appendChild(card);
+
+        // Animate pop-in with stagger
+        setTimeout(() => {
+            card.classList.add('pop-in');
+        }, index * 150); // stagger by 150ms
+
+        // Expand to show button after pop-in
+        setTimeout(() => {
+            card.classList.add('expanded');
+        }, index * 150 + 200);
     });
 }
 
