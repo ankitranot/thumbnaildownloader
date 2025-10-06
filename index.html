@@ -97,16 +97,13 @@ button:hover {
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(255,100,0,0.1);
     position: relative;
-    transform: translateY(50px);
-    opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s;
+    max-height: 220px; /* collapsed height */
+    transition: max-height 0.5s ease, box-shadow 0.3s;
 }
-.thumbnail-card.pop-in {
-    transform: translateY(0);
-    opacity: 1;
+.thumbnail-card.expanded {
+    max-height: 400px; /* expanded to fit button */
 }
 .thumbnail-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 12px 35px rgba(255,100,0,0.25);
 }
 .thumbnail-card img {
@@ -196,7 +193,7 @@ function generateThumbnails() {
     const thumbnailsDiv = document.getElementById('thumbnails');
     thumbnailsDiv.innerHTML = '';
 
-    sizes.forEach((size, index) => {
+    sizes.forEach(size => {
         const imgUrl = `https://img.youtube.com/vi/${videoId}/${size.name}.jpg`;
 
         const card = document.createElement('div');
@@ -225,15 +222,10 @@ function generateThumbnails() {
 
         thumbnailsDiv.appendChild(card);
 
-        // Animate pop-in with stagger
-        setTimeout(() => {
-            card.classList.add('pop-in');
-        }, index * 150); // stagger by 150ms
-
-        // Expand to show button after pop-in
+        // Expand the card immediately
         setTimeout(() => {
             card.classList.add('expanded');
-        }, index * 150 + 200);
+        }, 50); // small delay for smooth transition
     });
 }
 
